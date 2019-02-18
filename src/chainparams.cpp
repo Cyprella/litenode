@@ -49,7 +49,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "Litenode mining is funny";
+    const char* pszTimestamp = "Litenode mining is greathistoryhistory!";
     const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -82,7 +82,7 @@ public:
         consensus.BIP65Height = 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // 3.5 days
+        consensus.nPowTargetTimespan = 4 * 60; // 4 minutes
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -113,26 +113,25 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xfc;
-        pchMessageStart[1] = 0xc1;
-        pchMessageStart[2] = 0xb2;
-        pchMessageStart[3] = 0xda;
+        pchMessageStart[0] = 0x1c;
+        pchMessageStart[1] = 0xe1;
+        pchMessageStart[2] = 0xc2;
+        pchMessageStart[3] = 0xea;
         nDefaultPort = 9666;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1548765273, 2084568205, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1550479415, 2085668913, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x7d5e23b488757c770d7ee00a9a950d6ed35a793a80a583271ad88a373eda581a"));
-        assert(genesis.hashMerkleRoot == uint256S("0x62e4723525b27cfb68962c8821bf3f0d579bfb799a7115d1bc9b3f31895407e8"));
 
-       
-        
+        assert(consensus.hashGenesisBlock == uint256S("0x17061d2c70f4c7132c286374a48938c2bb793c1fbd0df9b863b48f33a4275432"));
+        assert(genesis.hashMerkleRoot == uint256S("0xa3f71389b864d637298e9c20e71c31c1cf426424ae094ac91691e063180eba17"));
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,176);
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x01, 0x88, 0xB2, 0x2E};
+        base58Prefixes[EXT_SECRET_KEY] = {0x01, 0x88, 0xAD, 0xE5};
 
         bech32_hrp = "ltn";
 
@@ -144,16 +143,16 @@ public:
 
         checkpointData = {
             {
-                {  0, uint256S("0x7d5e23b488757c770d7ee00a9a950d6ed35a793a80a583271ad88a373eda581a")},
+                {  0, uint256S("0x17061d2c70f4c7132c286374a48938c2bb793c1fbd0df9b863b48f33a4275432")},
                  }
         };
 
         chainTxData = ChainTxData{
             // Data as of block 59c9b9d3fec105bdc716d84caa7579503d5b05b73618d0bf2d5fa639f780a011 (height 1353397).
-            1516406833, // * UNIX timestamp of last known number of transactions
-            19831879,  // * total number of transactions between genesis and that timestamp
+            1550479415, // * UNIX timestamp of last known number of transactions
+              // * total number of transactions between genesis and that timestamp
                     //   (the tx=... number in the SetBestChain debug.log lines)
-            0.06     // * estimated number of transactions per second after that timestamp
+            0     // * estimated number of transactions per second after that timestamp
         };
     }
 };
